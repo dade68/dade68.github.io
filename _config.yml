@@ -1,1 +1,23 @@
-theme: jekyll-theme-cayman
+name: "flowaflow"
+author: 
+url: https://dade68.github.io
+baseurl: '/hydeout'
+resume_site: 
+description: 'The <a href="http://hyde.getpoole.com" target="_blank">Hyde</a> theme for <a href="http://jekyllrb.com"
+    target="_blank">Jekyll</a>, refreshed.'
+github_username: dade68 
+github: 
+plugins: [jekyll-paginate, jekyll-feed, jekyll-gist]
+permalink: /:year-:month-:day-:title
+paginate: 12
+paginate_path: "/page/:num/"
+exclude: ['README.md', 'Gemfile.lock', 'Gemfile', 'Rakefile']
+highlighter: rouge
+markdown: kramdown
+comments :
+  gitalk :
+    clientID : 
+    clientSecret : 
+    repo : 
+    owner : 
+    admin : 
