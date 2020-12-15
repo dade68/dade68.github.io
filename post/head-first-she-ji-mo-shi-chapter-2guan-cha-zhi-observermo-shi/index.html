@@ -4,7 +4,7 @@
 <meta name="description" content=""/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
-<title>flowaflow</title>
+<title>Head First 设计模式 Chapter 2：观察值(Observer)模式 | flowaflow</title>
 
 <link rel="shortcut icon" href="https://dade68.github.io/favicon.ico?v=1608021901976">
 
@@ -25,11 +25,11 @@
 
 
 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.css">
 </head>
 <body>
 <div class="main gt-bg-theme-color-first">
-    <div class="main-content">
-        <nav class="navbar navbar-expand-lg">
+    <nav class="navbar navbar-expand-lg">
     <div class="navbar-brand">
         <img class="user-avatar" src="/images/avatar.png" alt="头像">
         <div class="site-name gt-c-content-color-first">
@@ -85,22 +85,96 @@
     </div>
 </nav>
 
-        <div class="post-container">
-            <div class="post-detail gt-bg-theme-color-first">
-                <article class="gt-post-content">
-                    <h2 class="post-title">标签</h2>
-        <div class="tags-container">
-            
-                <a class="tag gt-c-content-color-first gt-a-link"
-                   href="https://dade68.github.io/tag/i_tN8IUk7/">#Head First 设计模式</a>
-            
-                <a class="tag gt-c-content-color-first gt-a-link"
-                   href="https://dade68.github.io/tag/dz6fDaAyx/">#CSAPP</a>
-            
+    <div class="post-container">
+        <div class="post-detail gt-bg-theme-color-second">
+            <article class="gt-post-content">
+                <h2 class="post-title">
+                    Head First 设计模式 Chapter 2：观察值(Observer)模式
+                </h2>
+                <div class="post-info">
+                    <time class="post-time gt-c-content-color-first">
+                        · 2020-12-15 ·
+                    </time>
+                    
+                        <a href="https://dade68.github.io/tag/i_tN8IUk7/" class="post-tags">
+                            # Head First 设计模式
+                        </a>
+                    
+                </div>
+                <div class="post-content">
+                    <ul>
+<li>观察者模式定义了对象之间一对多的关系。</li>
+<li>主题(也就是可观察者)用一个共同的接口来更新观察者。</li>
+<li>观察者和可观察者之间用松耦合方式组合(loosecoupling)，可观察者不知道观察者的细节，只知道观察者实现了观察者接口。</li>
+<li>使用此模式时，你可从被观察者处推(push)或拉(pull)数据(然而，推的方式被认为更“正确”)。</li>
+<li>有多个观察者时，不可以依赖特定的通知顺序。</li>
+<li>Java有多种观察者模式的实现，包括了通用的java.util.Observable。</li>
+<li>要注意java.util.Observable实现上所带来的一些问题。</li>
+<li>如果有必要的话，可以实现自己的Observable，这并不难，不要害怕。</li>
+<li>Swing大量使用观察者模式，许多GUI框架也是如此。</li>
+<li>此模式也被应用在许多地方，例如：JavaBeans、RMI。</li>
+</ul>
+<h1 id="oo原则">OO原则</h1>
+<ol>
+<li>封装变化</li>
+<li>多用组合，少用继承</li>
+<li>针对接口编程，不针对实现编程</li>
+<li>为交互对象之间的松耦合设计而努力。</li>
+</ol>
+<h1 id="oo模式">OO模式</h1>
+<p>观察者模式——在对象之间定义一对多的依赖，这样一来，当一个对象改变状态，依赖它的对象都会收到通知，并自动更新。</p>
+
+                </div>
+            </article>
         </div>
-    </article>
-</div>
-</div>
+
+        
+            <div class="next-post">
+                <div class="next gt-c-content-color-first">下一篇</div>
+                <a href="https://dade68.github.io/post/head-first-she-ji-mo-shi-chapter-1she-ji-mo-shi-ru-men/" class="post-title gt-a-link">
+                    Head First 设计模式 Chapter 1:设计模式入门
+                </a>
+            </div>
+        
+
+        
+            <span id="/post/head-first-she-ji-mo-shi-chapter-2guan-cha-zhi-observermo-shi/" class="leancloud_visitors" data-flag-title="Head First 设计模式 Chapter 2：观察值(Observer)模式">
+                <em class="post-meta-item-text">阅读量 </em>
+                <i class="leancloud-visitors-count">0</i>
+            </span>
+        
+
+        
+
+        
+            <script src='https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js'></script>
+
+<style>
+	div#vcomments{
+		width:100%;
+		max-width: 1000px;
+		padding: 2.5%
+	}
+</style>
+
+
+	<div id="vcomments"></div>
+
+<script>
+	new Valine({
+		el: '#vcomments',
+		appId: '',
+		appKey: '',
+		avatar: '',
+		pageSize: 5,
+		recordIp: false,
+		placeholder: 'Just Go Go',
+		visitor: true,
+	});
+</script>
+
+        
+
         <div class="site-footer gt-c-content-color-first">
     <div class="slogan gt-c-content-color-first">Welcome to my secret park!</div>
     <div class="social-container">
