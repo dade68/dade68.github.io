@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://dade68.github.io</id>
     <title>flowaflow</title>
-    <updated>2020-12-14T03:40:10.223Z</updated>
+    <updated>2020-12-15T08:20:14.459Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://dade68.github.io"/>
     <link rel="self" href="https://dade68.github.io/atom.xml"/>
@@ -10,6 +10,25 @@
     <logo>https://dade68.github.io/images/avatar.png</logo>
     <icon>https://dade68.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, flowaflow</rights>
+    <entry>
+        <title type="html"><![CDATA[Head First 设计模式 Chapter 1:设计模式入门]]></title>
+        <id>https://dade68.github.io/post/head-first-she-ji-mo-shi-chapter-1she-ji-mo-shi-ru-men/</id>
+        <link href="https://dade68.github.io/post/head-first-she-ji-mo-shi-chapter-1she-ji-mo-shi-ru-men/">
+        </link>
+        <updated>2020-12-15T08:06:01.000Z</updated>
+        <content type="html"><![CDATA[<ul>
+<li>良好的OO设计必须具备可复用、可扩充、可维护三个特性。</li>
+<li>模式可以让我们建造处具有良好OO设计质量的系统。</li>
+<li>模式被认为是历经验证的OO设计经验。</li>
+<li>模式不是代码，而是针对设计问题的通用解决方案。你可把它们应用到特定的应用中。</li>
+<li>模式不是被发明，而是被发现。</li>
+<li>大多数的模式和原则，都着眼于软件变化的主题。</li>
+<li>大多数的模式都允许系统局部改变独立于其他部分。</li>
+<li>我们常把系统中会变化的部分抽出来封装。</li>
+<li>模式让开发人员之间有共享的语言，能够最大化沟通的价值。</li>
+</ul>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[CSAPP Chapter 9: 虚拟内存]]></title>
         <id>https://dade68.github.io/post/csapp-chapter-9-xu-ni-nei-cun/</id>
