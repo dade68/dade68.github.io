@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://dade68.github.io</id>
     <title>flowaflow</title>
-    <updated>2020-12-15T08:50:42.643Z</updated>
+    <updated>2020-12-15T13:01:56.046Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://dade68.github.io"/>
     <link rel="self" href="https://dade68.github.io/atom.xml"/>
@@ -90,6 +90,13 @@ Linux将虚拟内存组织成一些区域(也叫做段)的集合。一个区域(
 1）Linux文件系统中的普通文件<br>
 2）匿名文件：映射到匿名文件的区域中的页面有时也叫做请求二进制零的页(demand-zerp page)。<br>
 无论在那种情况中，一旦一个虚拟页面被初始化了，它就在一个由内核维护的专门的交换文件(swap file)之间换来换去。交换文件也叫做(swap space)或者交换区域(swap area)。</p>
+<h1 id="动态内存分配">动态内存分配</h1>
+<p>动态内存分配器维护着一个进程的虚拟内存区域，称为堆(heap)。对于每个进程，内核维护着一个变量brk，它指向堆的顶部。<br>
+分配器将堆视为一组不同大小的块(block)的集合来维护。每个块就是一个连续的虚拟内存片(chunk)，要么是已分配的，要么是空闲的。一个已分配的块保持已分配状态，直到它被释放，这种释放要么是应用程序显示执行的，要么是内存分配器自身隐式执行的。</p>
+<ul>
+<li>显示分配器(explicit allocator)：要求应用显示的释放任何已分配的块。</li>
+<li>隐式分配器(implicit allocator)：要求分配器检测一个已分配块何时不再被程序所使用，那么就释放这个快。隐式分配器也叫做垃圾收集器(garbage collector)，而自动释放未使用的已分配内存的过程叫做垃圾收集(garbage collection)。</li>
+</ul>
 ]]></content>
     </entry>
     <entry>
