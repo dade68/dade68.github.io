@@ -1,10 +1,10 @@
-<html lang="zh">
+<html>
 <head>
     <meta charset="utf-8"/>
 <meta name="description" content=""/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
-<title>关于 - flowaflow</title>
+<title>Head First 设计模式 Chapter 3：装饰者模式 | flowaflow</title>
 
 <link rel="shortcut icon" href="https://dade68.github.io/favicon.ico?v=1608528861719">
 
@@ -25,7 +25,7 @@
 
 
 
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex/dist/katex.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.css">
 </head>
 <body>
 <div class="main gt-bg-theme-color-first">
@@ -86,14 +86,67 @@
 </nav>
 
     <div class="post-container">
-        <div class="post-detail">
+        <div class="post-detail gt-bg-theme-color-second">
             <article class="gt-post-content">
-                <div class="post-content">
+                <h2 class="post-title">
+                    Head First 设计模式 Chapter 3：装饰者模式
+                </h2>
+                <div class="post-info">
+                    <time class="post-time gt-c-content-color-first">
+                        · 2020-12-21 ·
+                    </time>
                     
+                        <a href="https://dade68.github.io/tag/i_tN8IUk7/" class="post-tags">
+                            # Head First 设计模式
+                        </a>
+                    
+                </div>
+                <div class="post-content">
+                    <p>开放-关闭原则</p>
+<ul>
+<li>类应该对扩展开放，对修改关闭</li>
+</ul>
+<p>我们的目标是允许类容易扩展，在不修改现有代码的情况下，就可搭配新的行为。这样的设计具有弹性可以应对改变，可以接受新的功能来应对改变的需求。</p>
+<p>在选择需要被扩展的代码部分时要小心。每个部分都采用开放-关闭原则，是一种浪费，也没必要，还会导致代码变得复杂且难以理解。</p>
+<p>OO模式</p>
+<ul>
+<li>装饰者模式——动态地将责任附加到对象上。想要扩展功能，装饰者提供有别于继承的另一种选择。</li>
+</ul>
+<p>要点：</p>
+<ul>
+<li>继承属于扩展形式之一，但不见得是达到弹性设计的最佳方式。</li>
+<li>在我们的设计中，应该允许行为可以被扩展，而无需修改现有的的代码。</li>
+<li>组合和委托可用于在运行时动态地加上新的行为。</li>
+<li>除了继承，装饰者模式也可以让我们扩展行为。</li>
+<li><strong>装饰者模式意味着一群装饰者类，这些类用来包装具体组件。</strong></li>
+<li><strong>装饰者类反映出被装饰的组件类型（事实上，他们具有相同的类型都经过接口或者继承实现）。</strong></li>
+<li><strong>装饰者可以在被装饰者的行为前面与/或后面加上自己的行为，甚至将被装饰者的行为整个取代掉，而达到特定的目的。</strong></li>
+<li>你可以用无数个装饰者包装一个组件。</li>
+<li>装饰者一般对组件的客户是透明的，除非客户程序依赖于组件的具体类型。</li>
+<li>装饰者会导致设计中出现许多小对象，如果过度使用，会让程序变得很复杂。</li>
+</ul>
+<p><s><em>装饰者类和被装饰者类具有相同的类型，可以使得装饰者继续嵌套装饰。</em></s></p>
+
                 </div>
             </article>
         </div>
-        <br>
+
+        
+            <div class="next-post">
+                <div class="next gt-c-content-color-first">下一篇</div>
+                <a href="https://dade68.github.io/post/csapp-chapter-11wang-luo-bian-cheng/" class="post-title gt-a-link">
+                    CSAPP Chapter 11：网络编程
+                </a>
+            </div>
+        
+
+        
+            <span id="/post/head-first-she-ji-mo-shi-chapter-3zhuang-shi-zhe-mo-shi/" class="leancloud_visitors" data-flag-title="Head First 设计模式 Chapter 3：装饰者模式">
+                <em class="post-meta-item-text">阅读量 </em>
+                <i class="leancloud-visitors-count">0</i>
+            </span>
+        
+
         
 
         
@@ -124,7 +177,6 @@
 </script>
 
         
-
 
         <div class="site-footer gt-c-content-color-first">
     <div class="slogan gt-c-content-color-first">Welcome to my secret park!</div>
