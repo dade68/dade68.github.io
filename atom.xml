@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://dade68.github.io</id>
     <title>flowaflow</title>
-    <updated>2020-12-21T05:34:41.898Z</updated>
+    <updated>2020-12-22T07:00:46.579Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://dade68.github.io"/>
     <link rel="self" href="https://dade68.github.io/atom.xml"/>
@@ -10,6 +10,50 @@
     <logo>https://dade68.github.io/images/avatar.png</logo>
     <icon>https://dade68.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, flowaflow</rights>
+    <entry>
+        <title type="html"><![CDATA[Head First 设计模式 Chapter 4：工厂模式]]></title>
+        <id>https://dade68.github.io/post/head-first-she-ji-mo-shi-chapter-4gong-han-mo-shi/</id>
+        <link href="https://dade68.github.io/post/head-first-she-ji-mo-shi-chapter-4gong-han-mo-shi/">
+        </link>
+        <updated>2020-12-21T07:12:31.000Z</updated>
+        <content type="html"><![CDATA[<p>工厂（factory）处理创建对象的细节。</p>
+<p><strong>工厂方法用来处理对象的创建，并将这样的行为封装在子类中。这样，客户程序中关于超类的代码就和子类对象创建代码解耦了</strong></p>
+<p><code>abstract Product factoryMethod(string type)</code></p>
+<p>工厂方法模式：</p>
+<blockquote>
+<p>定义了一个创建对象的接口，但由子类决定要实例化的类是哪一个。工厂方法让类把实例化推迟到子类。</p>
+</blockquote>
+<p>依赖倒置原则（Dependency Inversion Principle）:</p>
+<blockquote>
+<p>要依赖抽象，不要依赖具体类</p>
+</blockquote>
+<p>这个原则说明了：不能让高层组件依赖底层组件，而且，不敢高层或底层组件，“两者”都应该依赖于抽象。<br>
+在依赖倒置原则中的倒置指的是和一般OO设计的思考方式完全相反。<br>
+使用中的的指导方针：</p>
+<ul>
+<li>变量不可以持有具体类的应用。（如果使用 new，就会持有具体类的应用，你可以改用工厂来避开这样的做法。）</li>
+<li>不要让类派生自具体类。（请派生自一个抽象—接口或抽象类。）</li>
+<li>不要覆盖基类中已实现的方法。</li>
+</ul>
+<p>抽象工厂模式：</p>
+<blockquote>
+<p>提供一个接口，用于创建相关或依赖对象的家族，而不需要明确指定具体类。</p>
+</blockquote>
+<p>抽象工厂允许客户使用抽象的接口来创建一组相关的产品，而不需要知道（或关心）实际产出的具体产品是什么。这样一来，客户就从具体的产品中被解耦。</p>
+<p>要点：</p>
+<ul>
+<li>所有的工厂都是用来封装对象的创建。</li>
+<li>简单工厂，虽然不是真正的设计模式，但仍不失为一个简单的方法，可以将客户程序从具体类解耦。</li>
+<li>工厂方法使用继承：把对象的创建委托给子类，子类实现工厂方法来创建对象。</li>
+<li>抽象工厂使用对象组合：对象的创建被实现在工厂接口所暴露的方法中。</li>
+<li>所有工厂模式都通过减少应用程序和具体类之间的依赖促进松耦合。</li>
+<li>工厂方法允许类将实例化延迟到子类进行。</li>
+<li>抽象工厂创建相关的对象家族，而不需要依赖它们的实现类。</li>
+<li>依赖倒置原则，指导我们避免依赖具体类型，而要尽量依赖抽象。</li>
+<li>工厂是很有威力的技巧，帮助我们针对抽象编程，而不要针对具体类编程。</li>
+</ul>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Head First 设计模式 Chapter 3：装饰者模式]]></title>
         <id>https://dade68.github.io/post/head-first-she-ji-mo-shi-chapter-3zhuang-shi-zhe-mo-shi/</id>
