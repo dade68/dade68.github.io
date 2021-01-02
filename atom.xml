@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://dade68.github.io</id>
     <title>flowaflow</title>
-    <updated>2021-01-02T06:02:30.975Z</updated>
+    <updated>2021-01-02T07:58:40.001Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://dade68.github.io"/>
     <link rel="self" href="https://dade68.github.io/atom.xml"/>
@@ -10,6 +10,141 @@
     <logo>https://dade68.github.io/images/avatar.png</logo>
     <icon>https://dade68.github.io/favicon.ico</icon>
     <rights>All rights reserved 2021, flowaflow</rights>
+    <entry>
+        <title type="html"><![CDATA[ 整数寄存器]]></title>
+        <id>https://dade68.github.io/post/zheng-shu-ji-cun-qi/</id>
+        <link href="https://dade68.github.io/post/zheng-shu-ji-cun-qi/">
+        </link>
+        <updated>2021-01-02T05:32:22.000Z</updated>
+        <content type="html"><![CDATA[<table>
+<thead>
+<tr>
+<th>63</th>
+<th style="text-align:left">31</th>
+<th style="text-align:left">15</th>
+<th style="text-align:left">7</th>
+<th style="text-align:left">0</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>%rax</td>
+<td style="text-align:left">%eax</td>
+<td style="text-align:left">%ax</td>
+<td style="text-align:left">%al</td>
+<td style="text-align:left">返回值</td>
+</tr>
+<tr>
+<td>%rbx</td>
+<td style="text-align:left">%ebx</td>
+<td style="text-align:left">%bx</td>
+<td style="text-align:left">%bl</td>
+<td style="text-align:left">被调用者保存</td>
+</tr>
+<tr>
+<td>%rcx</td>
+<td style="text-align:left">%ecx</td>
+<td style="text-align:left">%cx</td>
+<td style="text-align:left">%cl</td>
+<td style="text-align:left">第4个参数</td>
+</tr>
+<tr>
+<td>%rdx</td>
+<td style="text-align:left">%edx</td>
+<td style="text-align:left">%dx</td>
+<td style="text-align:left">%dl</td>
+<td style="text-align:left">第3个参数</td>
+</tr>
+<tr>
+<td>%rsi</td>
+<td style="text-align:left">%esi</td>
+<td style="text-align:left">%si</td>
+<td style="text-align:left">%sil</td>
+<td style="text-align:left">第2个参数</td>
+</tr>
+<tr>
+<td>%rdi</td>
+<td style="text-align:left">%edi</td>
+<td style="text-align:left">%di</td>
+<td style="text-align:left">%dil</td>
+<td style="text-align:left">第1个参数</td>
+</tr>
+<tr>
+<td>%rbp</td>
+<td style="text-align:left">%ebp</td>
+<td style="text-align:left">%bp</td>
+<td style="text-align:left">%bpl</td>
+<td style="text-align:left">被调用者保存</td>
+</tr>
+<tr>
+<td>%rsp</td>
+<td style="text-align:left">%esp</td>
+<td style="text-align:left">%sp</td>
+<td style="text-align:left">%spl</td>
+<td style="text-align:left">栈指针</td>
+</tr>
+<tr>
+<td>%r8</td>
+<td style="text-align:left">%r8d</td>
+<td style="text-align:left">%r8w</td>
+<td style="text-align:left">%r8b</td>
+<td style="text-align:left">第5个参数</td>
+</tr>
+<tr>
+<td>%r9</td>
+<td style="text-align:left">%r9d</td>
+<td style="text-align:left">%r9w</td>
+<td style="text-align:left">%r9b</td>
+<td style="text-align:left">第6个参数</td>
+</tr>
+<tr>
+<td>%r10</td>
+<td style="text-align:left">%r10d</td>
+<td style="text-align:left">%r10w</td>
+<td style="text-align:left">%r10b</td>
+<td style="text-align:left">调用者保存</td>
+</tr>
+<tr>
+<td>%r11</td>
+<td style="text-align:left">%r11d</td>
+<td style="text-align:left">%r11w</td>
+<td style="text-align:left">%r11b</td>
+<td style="text-align:left">调用者保存</td>
+</tr>
+<tr>
+<td>%r12</td>
+<td style="text-align:left">%r12d</td>
+<td style="text-align:left">%r12w</td>
+<td style="text-align:left">%r12b</td>
+<td style="text-align:left">被调用者保存</td>
+</tr>
+<tr>
+<td>%r13</td>
+<td style="text-align:left">%r13d</td>
+<td style="text-align:left">%r13w</td>
+<td style="text-align:left">%r13b</td>
+<td style="text-align:left">被调用者保存</td>
+</tr>
+<tr>
+<td>%r14</td>
+<td style="text-align:left">%r14d</td>
+<td style="text-align:left">%r14w</td>
+<td style="text-align:left">%r14b</td>
+<td style="text-align:left">被调用者保存</td>
+</tr>
+<tr>
+<td>%r15</td>
+<td style="text-align:left">%r15d</td>
+<td style="text-align:left">%r15w</td>
+<td style="text-align:left">%r15b</td>
+<td style="text-align:left">被调用者保存</td>
+</tr>
+</tbody>
+</table>
+<p>程序计数器 --&gt; %rip<br>
+% -----&gt; AT&amp;T风格</p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[CSAPP lab1]]></title>
         <id>https://dade68.github.io/post/csapp-lab1/</id>
@@ -413,33 +548,6 @@ unsigned floatPower2(int x) {
 </ol>
 <h1 id="oo模式">OO模式</h1>
 <p>观察者模式——在对象之间定义一对多的依赖，这样一来，当一个对象改变状态，依赖它的对象都会收到通知，并自动更新。</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Head First 设计模式 Chapter 1:设计模式入门]]></title>
-        <id>https://dade68.github.io/post/head-first-she-ji-mo-shi-chapter-1she-ji-mo-shi-ru-men/</id>
-        <link href="https://dade68.github.io/post/head-first-she-ji-mo-shi-chapter-1she-ji-mo-shi-ru-men/">
-        </link>
-        <updated>2020-12-15T08:06:01.000Z</updated>
-        <content type="html"><![CDATA[<ul>
-<li>良好的OO设计必须具备可复用、可扩充、可维护三个特性。</li>
-<li>模式可以让我们建造处具有良好OO设计质量的系统。</li>
-<li>模式被认为是历经验证的OO设计经验。</li>
-<li>模式不是代码，而是针对设计问题的通用解决方案。你可把它们应用到特定的应用中。</li>
-<li>模式不是被发明，而是被发现。</li>
-<li>大多数的模式和原则，都着眼于软件变化的主题。</li>
-<li>大多数的模式都允许系统局部改变独立于其他部分。</li>
-<li>我们常把系统中会变化的部分抽出来封装。</li>
-<li>模式让开发人员之间有共享的语言，能够最大化沟通的价值。</li>
-</ul>
-<h1 id="oo原则">OO原则</h1>
-<ol>
-<li>封装变化</li>
-<li>多用组合，少用继承</li>
-<li>针对接口编程，不针对实现编程</li>
-</ol>
-<h1 id="oo模式">OO模式</h1>
-<p>策略模式——定义算法族，分别封装起来，让它们之间可以互相替换，此模式让算法的变化独立于使用算法的客户。</p>
 ]]></content>
     </entry>
 </feed>
