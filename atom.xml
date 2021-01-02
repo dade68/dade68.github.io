@@ -2,14 +2,265 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://dade68.github.io</id>
     <title>flowaflow</title>
-    <updated>2020-12-22T07:00:46.579Z</updated>
+    <updated>2021-01-02T06:02:30.975Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://dade68.github.io"/>
     <link rel="self" href="https://dade68.github.io/atom.xml"/>
     <subtitle>Welcome to my secret park!</subtitle>
     <logo>https://dade68.github.io/images/avatar.png</logo>
     <icon>https://dade68.github.io/favicon.ico</icon>
-    <rights>All rights reserved 2020, flowaflow</rights>
+    <rights>All rights reserved 2021, flowaflow</rights>
+    <entry>
+        <title type="html"><![CDATA[CSAPP lab1]]></title>
+        <id>https://dade68.github.io/post/csapp-lab1/</id>
+        <link href="https://dade68.github.io/post/csapp-lab1/">
+        </link>
+        <updated>2020-12-25T08:51:07.000Z</updated>
+        <content type="html"><![CDATA[<pre><code>//3
+/* 
+ * isAsciiDigit - return 1 if 0x30 &lt;= x &lt;= 0x39 (ASCII codes for characters '0' to '9')
+ *   Example: isAsciiDigit(0x35) = 1.
+ *            isAsciiDigit(0x3a) = 0.
+ *            isAsciiDigit(0x05) = 0.
+ *   Legal ops: ! ~ &amp; ^ | + &lt;&lt; &gt;&gt;
+ *   Max ops: 15
+ *   Rating: 3
+ */
+int isAsciiDigit(int x) {
+    int sign = 0x1&lt;&lt;31;
+    int upperBound = ~(sign|0x39);
+    int lowerBound = ~0x30;
+    upperBound = sign&amp;(upperBound+x)&gt;&gt;31;
+    lowerBound = sign&amp;(lowerBound+1+x)&gt;&gt;31;
+    return !(upperBound|lowerBound);
+}
+</code></pre>
+<ul>
+<li>判断是否大于或小于某个数，这里的做法是通过判断将这个数加到某个数上，最高位是否改变来判断的</li>
+</ul>
+<pre><code>/* 
+ * conditional - same as x ? y : z 
+ *   Example: conditional(2,4,5) = 4
+ *   Legal ops: ! ~ &amp; ^ | + &lt;&lt; &gt;&gt;
+ *   Max ops: 16
+ *   Rating: 3
+ */
+int conditional(int x, int y, int z) {
+    int flag = (~!x) + 1;
+    return (flag &amp; z) | (~flag &amp; y);
+}
+</code></pre>
+<ul>
+<li>转换为全0和全1</li>
+</ul>
+<pre><code>/* 
+ * isLessOrEqual - if x &lt;= y  then return 1, else return 0 
+ *   Example: isLessOrEqual(4,5) = 1.
+ *   Legal ops: ! ~ &amp; ^ | + &lt;&lt; &gt;&gt;
+ *   Max ops: 24
+ *   Rating: 3
+ */
+int isLessOrEqual(int x, int y) {
+    int sign = (x &gt;&gt; 31) ^ (y &gt;&gt; 31);
+    int a = 0x1 &amp; sign &amp; (x &gt;&gt; 31);
+    int b = !sign &amp; !((y + ~x + 1) &gt;&gt; 31);
+    return a | b;
+}
+</code></pre>
+<ul>
+<li>先判断二者是否同号，同号按正常处理 x + (-y)；异号就看负号或正号在哪边</li>
+</ul>
+<pre><code>/* 
+ * logicalNeg - implement the ! operator, using all of 
+ *              the legal operators except !
+ *   Examples: logicalNeg(3) = 0, logicalNeg(0) = 1
+ *   Legal ops: ~ &amp; ^ | + &lt;&lt; &gt;&gt;
+ *   Max ops: 12
+ *   Rating: 4 
+ */
+int logicalNeg(int x) {
+    int a = x &gt;&gt; 31;
+    int b = (~x + 1) &gt;&gt; 31;
+    return (a | b) + 1;
+}
+</code></pre>
+<ul>
+<li>核心在于找0的特点，+0，-0最高位都为0，全1和全0加1就变成了0和1，可以作为返回值</li>
+</ul>
+<hr>
+<h3 id="浮点数">浮点数</h3>
+<pre><code>//float
+/* 
+ * floatScale2 - Return bit-level equivalent of expression 2*f for
+ *   floating point argument f.
+ *   Both the argument and result are passed as unsigned int's, but
+ *   they are to be interpreted as the bit-level representation of
+ *   single-precision floating point values.
+ *   When argument is NaN, return argument
+ *   Legal ops: Any integer/unsigned operations incl. ||, &amp;&amp;. also if, while
+ *   Max ops: 30
+ *   Rating: 4
+ */
+unsigned floatScale2(unsigned uf) {
+    int sign = uf &gt;&gt; 31;
+    int exp = (uf &amp; 0x7f800000) &gt;&gt; 23;
+    int frac = uf &amp; 0x7fffff;
+
+    if (exp == 255) {
+        return uf;
+    } else if (exp == 0) {
+        frac &lt;&lt;= 1;
+        return sign &lt;&lt; 31 | exp &lt;&lt; 23 | frac;
+    } else {
+        exp += 1;
+        return  sign &lt;&lt; 31 | exp &lt;&lt; 23 | frac;
+    }
+}
+/*
+ * floatFloat2Int - Return bit-level equivalent of expression (int) f
+ *   for floating point argument f.
+ *   Argument is passed as unsigned int, but
+ *   it is to be interpreted as the bit-level representation of a
+ *   single-precision floating point value.
+ *   Anything out of range (including NaN and infinity) should return
+ *   0x80000000u.
+ *   Legal ops: Any integer/unsigned operations incl. ||, &amp;&amp;. also if, while
+ *   Max ops: 30
+ *   Rating: 4
+ */
+int floatFloat2Int(unsigned uf) {
+     int sign = (uf &gt;&gt; 31) &amp; 0x1;
+     int exp = ((uf &amp; 0x7f800000) &gt;&gt; 23) - 127;
+     int frac = uf &amp; 0x7fffff;
+
+     if (exp &lt; 0) return 0;
+     else if (exp &gt;= 31) return 0x80000000u;
+     else {
+         frac = frac | (1 &lt;&lt; 23);
+         if (exp &gt; 23) frac &lt;&lt;= (exp - 23);
+         else frac &gt;&gt;= (23 - exp);
+     }
+     if (sign) return -frac;
+     else return frac;
+}
+/* 
+ * floatPower2 - Return bit-level equivalent of the expression 2.0^x
+ *   (2.0 raised to the power x) for any 32-bit integer x.
+ *
+ *   The unsigned value that is returned should have the identical bit
+ *   representation as the single-precision floating-point number 2.0^x.
+ *   If the result is too small to be represented as a denorm, return
+ *   0. If too large, return +INF.
+ * 
+ *   Legal ops: Any integer/unsigned operations incl. ||, &amp;&amp;. Also if, while 
+ *   Max ops: 30 
+ *   Rating: 4
+ */
+unsigned floatPower2(int x) {
+    if (x &gt;= 128) return 0xff &lt;&lt;23;
+    else if (x &lt; -149) return 0;
+    else {
+        if (x &gt;= -126) return (x + 127) &lt;&lt; 23;
+        else return 1 &lt;&lt; (x + 149);
+    }
+}
+</code></pre>
+<ul>
+<li><img src="https://dade68.github.io/post-images/1608962095418.jpg" alt="" loading="lazy"></li>
+<li><img src="https://dade68.github.io/post-images/1608962109785.jpg" alt="" loading="lazy"></li>
+<li><img src="https://dade68.github.io/post-images/1608962144892.jpg" alt="" loading="lazy"></li>
+</ul>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Head First 设计模式 Chapter6：命令模式--封装调用]]></title>
+        <id>https://dade68.github.io/post/head-first-she-ji-mo-shi-chapter6ming-ling-mo-shi-feng-zhuang-diao-yong/</id>
+        <link href="https://dade68.github.io/post/head-first-she-ji-mo-shi-chapter6ming-ling-mo-shi-feng-zhuang-diao-yong/">
+        </link>
+        <updated>2020-12-23T02:58:52.000Z</updated>
+        <content type="html"><![CDATA[<p>命令模式：</p>
+<blockquote>
+<p>将“请求”封装成对象，以便使用不同的请求、队列或者日志来参数化其他对象。命令模式也支持可撤销的操作。</p>
+</blockquote>
+<blockquote>
+<p>Nocommand 对象是一个空对象(null object)的例子。当你不想返回一个有意义的的对象时，空对象就很有用。客户也可以将处理 null 的责任转移给空对象。举例来说，遥控器不可能一出厂就设置了有意义的命令对象，所以提供了 NoCommand 对象作为代用品，当调用它的 execute() 方法时，这种对象什么事情都不做。<br>
+在许多设计模式中，都会看到空对象的使用。甚至有些时候，空对象本身也被视为是一种设计模式。</p>
+</blockquote>
+<p>在宏命令中，用命令数组存储一大堆命令。</p>
+<p>要点：</p>
+<ul>
+<li>命令模式将发出请求的对象和执行请求的对象解耦。</li>
+<li>在被解耦的两者之间是通过命令对象进行沟通的。命令对象封装了接受者和一个或一组动作。</li>
+<li>调用者通过调用命令对象的 execute() 发出请求，这会使得接受者的动作被调用。</li>
+<li>调用者可以接受命令当做参数，甚至在运行时动态地进行。</li>
+<li>命令可以支持撤销，做法是实现一个 undo() 方法来回到 execute() 被执行前的状态。</li>
+<li>宏命令是命令的一种简单的延伸，允许调用多个命令。宏方法也可以支持撤销。</li>
+<li>实际操作时，很常见使用“聪明”命令对象，也就是直接实现了请求，而不是将工作委托给接受者。</li>
+<li>命令也可以用来实现日志和事务系统。</li>
+</ul>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Head First 设计模式 Chapter5：单件模式（Singleton Pattern）]]></title>
+        <id>https://dade68.github.io/post/head-first-she-ji-mo-shi-chapter5dan-jian-mo-shi-singleton-pattern/</id>
+        <link href="https://dade68.github.io/post/head-first-she-ji-mo-shi-chapter5dan-jian-mo-shi-singleton-pattern/">
+        </link>
+        <updated>2020-12-22T11:17:22.000Z</updated>
+        <content type="html"><![CDATA[<pre><code>public class Singleton {
+    private static Singleton uniqueInstance;
+    // 这里有其他的有用实例化变量
+    private Singleton() { }
+    public static Singleton getInstance () {
+        if (uniqueInstance == null) {
+            uniqueInstance = new Singleton();
+        }
+        return uniqueInstance;
+    }
+    // 这里是其他的有用方法
+}
+</code></pre>
+<p>单件模式：</p>
+<blockquote>
+<p>确保一个类只有一个实例，并提供一个全局访问点。</p>
+</blockquote>
+<ul>
+<li>我们正在把某个类设计成自己管理的一个单独实例，同时也避免其他类再自行产生实例。要想取得单间实例，通过单件类是唯一的途径。</li>
+<li>我们也提供对这个实例的全局访问点：当你需要实例时，向类查询，它会返回单个实例。前面的例子利用延迟实例化的方式创建单件，这种做法对资源敏感的对象特别重要。</li>
+</ul>
+<p>多线程创建实例问题解决办法：</p>
+<ol>
+<li>同步 getInstance() 方法</li>
+<li>急切实例化</li>
+<li>双重检查加锁</li>
+</ol>
+<p><strong>双重检查加锁</strong></p>
+<pre><code>public class Singleton {
+    private volatile static Singleton uniqueInstance;
+    // 这里有其他的有用实例化变量
+    private Singleton() { }
+    public static Singleton getInstance () {
+        if (uniqueInstance == null) {
+            synchronized(Singleton.class) {
+                if (uniqueInstance == null) {
+                     uniqueInstance = new Singleton();
+                }
+            }
+        }
+        return uniqueInstance;
+    }
+    // 这里是其他的有用方法
+}
+</code></pre>
+<p>要点：</p>
+<ul>
+<li>单件模式确保程序中一个类最多只有一个实例。</li>
+<li>单件模式也提供访问这个实例的全局点。</li>
+<li>在 Java 中实现单件模式需要私有的构造器、一个静态方法和一个静态变量。</li>
+<li>确定在性能和资源上的限制，然后小心地选择适当的方案来实现单件，以解决多线程的问题（我们必须认定所有的程序都是多线程的）。</li>
+<li>小心，你如果使用多个类加载器，可能导致单件失效而产生多个实例。</li>
+</ul>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Head First 设计模式 Chapter 4：工厂模式]]></title>
         <id>https://dade68.github.io/post/head-first-she-ji-mo-shi-chapter-4gong-han-mo-shi/</id>
@@ -189,50 +440,6 @@
 </ol>
 <h1 id="oo模式">OO模式</h1>
 <p>策略模式——定义算法族，分别封装起来，让它们之间可以互相替换，此模式让算法的变化独立于使用算法的客户。</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[CSAPP Chapter 9: 虚拟内存]]></title>
-        <id>https://dade68.github.io/post/csapp-chapter-9-xu-ni-nei-cun/</id>
-        <link href="https://dade68.github.io/post/csapp-chapter-9-xu-ni-nei-cun/">
-        </link>
-        <updated>2020-12-11T07:35:06.000Z</updated>
-        <content type="html"><![CDATA[<p>为了更加有效地管理内存并且少出错， 现代系统提供了一种对主存的抽象概念，叫做虚拟内存(VM)。虚拟内存是硬件异常、硬件地址翻译、主存、磁盘文件和内核软件的完美交互，它为每个进程提供了一个大的、一致的和私有的地址空间。通过一个很清晰的机制，虚拟内存提供了三个重要的能力：1）它将主存看成是一个存储在磁盘上的地址空间高速缓存，在主存中只保存活动区域，并根据需要在磁盘和主存之间来回传送数据，通过这种方式，它高效地使用了主存。2）它为每个进程提供了一致的空间，从而简化了内存管理。3)它保护了每个进程的地址空间不被其他进程破坏。</p>
-<h1 id="linux虚拟内存系统">Linux虚拟内存系统</h1>
-<p>Linux为每个进程维护了一个单独的虚拟地址空间。<br>
-内核虚拟内存包含内核中的代码和数据结构。内核虚拟内存的某些区域被映射到所有进程共享的物理页面。</p>
-<ol>
-<li>Linux虚拟内存区域<br>
-Linux将虚拟内存组织成一些区域(也叫做段)的集合。一个区域(area)就是已经存在着的(已分配的)虚拟内存的连续片(chunk)，这些页是以某种方式相关联的。一般由一种内核数据结构记录一个进程中的虚拟内存区域。</li>
-<li>Linux缺页异常处理<br>
-假设MMU在试图翻译某个虚拟地址A时，触发了一个缺页。这个异常导致控制转移到内核的缺页处理程序，处理程序随后就执行下面的步骤：<br>
-1）虚拟地址A是合法的吗？换句话说，A在某个区域结构定义的区域内吗？为了回答这个问题，缺页处理程序搜索区域结构的链表，实际中，Linux在链表中构建了一棵树，并在这棵树上进行查找。如果这个指令是非法的，那么缺页处理程序就触发一个段错误，从而终止这个进程。<br>
-2）试图进行的内存访问是否合法？换句话说，进程是否有读、写或者执行这个区域内页面的权限？如果试图进行的访问是不合法的，那么缺页处理程序会触发一个保护异常，从而终止这个进程。<br>
-3）此刻，内核知道这个缺页是由于对合法的虚拟地址进行合法的操作造成的。它是这样来处理这个缺页的：选择一个牺牲页面，如果这个牺牲页面被修改过，那么就将它交换出去，换入新的页面并更新页表。当缺页处理程序返回时，CPU重新启动引起缺页的指令，这条指令将再次发送A到MMU。这次，MMU就能正常的翻译A，而不会再产生缺页中断了。</li>
-</ol>
-<h1 id="内存映射">内存映射</h1>
-<p>Linux通过将一个虚拟内存区域与一个磁盘上的对象(object)关联起来，以初始化这个虚拟内存区域的内容，这个过程称为内存映射(memory mapping)。虚拟内存区域可以映射到两种类型的对象中的一种：<br>
-1）Linux文件系统中的普通文件<br>
-2）匿名文件：映射到匿名文件的区域中的页面有时也叫做请求二进制零的页(demand-zerp page)。<br>
-无论在那种情况中，一旦一个虚拟页面被初始化了，它就在一个由内核维护的专门的交换文件(swap file)之间换来换去。交换文件也叫做(swap space)或者交换区域(swap area)。</p>
-<h1 id="动态内存分配">动态内存分配</h1>
-<p>动态内存分配器维护着一个进程的虚拟内存区域，称为堆(heap)。对于每个进程，内核维护着一个变量brk，它指向堆的顶部。<br>
-分配器将堆视为一组不同大小的块(block)的集合来维护。每个块就是一个连续的虚拟内存片(chunk)，要么是已分配的，要么是空闲的。一个已分配的块保持已分配状态，直到它被释放，这种释放要么是应用程序显示执行的，要么是内存分配器自身隐式执行的。</p>
-<ul>
-<li>显示分配器(explicit allocator)：要求应用显示的释放任何已分配的块。</li>
-<li>隐式分配器(implicit allocator)：要求分配器检测一个已分配块何时不再被程序所使用，那么就释放这个快。隐式分配器也叫做垃圾收集器(garbage collector)，而自动释放未使用的已分配内存的过程叫做垃圾收集(garbage collection)。</li>
-</ul>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[大聪明牛逼]]></title>
-        <id>https://dade68.github.io/post/da-cong-ming-niu-bi/</id>
-        <link href="https://dade68.github.io/post/da-cong-ming-niu-bi/">
-        </link>
-        <updated>2020-12-11T03:51:03.000Z</updated>
-        <content type="html"><![CDATA[<p>不知道写什么好，那就<strong>杨奕飞牛逼</strong>就完事了！<br>
-😜😝😛<br>
-<img src="https://dade68.github.io/post-images/1607659197957.gif" alt="" loading="lazy"></p>
 ]]></content>
     </entry>
 </feed>
