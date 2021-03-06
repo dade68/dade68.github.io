@@ -4,7 +4,7 @@
 <meta name="description" content=""/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
-<title>CSAPP Chapter 9: 虚拟内存 | flowaflow</title>
+<title>Mysql 查询 | flowaflow</title>
 
 <link rel="shortcut icon" href="https://dade68.github.io/favicon.ico?v=1615018728738">
 
@@ -89,44 +89,72 @@
         <div class="post-detail gt-bg-theme-color-second">
             <article class="gt-post-content">
                 <h2 class="post-title">
-                    CSAPP Chapter 9: 虚拟内存
+                    Mysql 查询
                 </h2>
                 <div class="post-info">
                     <time class="post-time gt-c-content-color-first">
-                        · 2020-12-11 ·
+                        · 2021-03-06 ·
                     </time>
                     
-                        <a href="https://dade68.github.io/tag/dz6fDaAyx/" class="post-tags">
-                            # CSAPP
+                        <a href="https://dade68.github.io/tag/agYHaqlP_/" class="post-tags">
+                            # 数据库
                         </a>
                     
                 </div>
                 <div class="post-content">
-                    <p>为了更加有效地管理内存并且少出错， 现代系统提供了一种对主存的抽象概念，叫做虚拟内存(VM)。虚拟内存是硬件异常、硬件地址翻译、主存、磁盘文件和内核软件的完美交互，它为每个进程提供了一个大的、一致的和私有的地址空间。通过一个很清晰的机制，虚拟内存提供了三个重要的能力：1）它将主存看成是一个存储在磁盘上的地址空间高速缓存，在主存中只保存活动区域，并根据需要在磁盘和主存之间来回传送数据，通过这种方式，它高效地使用了主存。2）它为每个进程提供了一致的空间，从而简化了内存管理。3)它保护了每个进程的地址空间不被其他进程破坏。</p>
-<h1 id="linux虚拟内存系统">Linux虚拟内存系统</h1>
-<p>Linux为每个进程维护了一个单独的虚拟地址空间。<br>
-内核虚拟内存包含内核中的代码和数据结构。内核虚拟内存的某些区域被映射到所有进程共享的物理页面。</p>
-<ol>
-<li>Linux虚拟内存区域<br>
-Linux将虚拟内存组织成一些区域(也叫做段)的集合。一个区域(area)就是已经存在着的(已分配的)虚拟内存的连续片(chunk)，这些页是以某种方式相关联的。一般由一种内核数据结构记录一个进程中的虚拟内存区域。</li>
-<li>Linux缺页异常处理<br>
-假设MMU在试图翻译某个虚拟地址A时，触发了一个缺页。这个异常导致控制转移到内核的缺页处理程序，处理程序随后就执行下面的步骤：<br>
-1）虚拟地址A是合法的吗？换句话说，A在某个区域结构定义的区域内吗？为了回答这个问题，缺页处理程序搜索区域结构的链表，实际中，Linux在链表中构建了一棵树，并在这棵树上进行查找。如果这个指令是非法的，那么缺页处理程序就触发一个段错误，从而终止这个进程。<br>
-2）试图进行的内存访问是否合法？换句话说，进程是否有读、写或者执行这个区域内页面的权限？如果试图进行的访问是不合法的，那么缺页处理程序会触发一个保护异常，从而终止这个进程。<br>
-3）此刻，内核知道这个缺页是由于对合法的虚拟地址进行合法的操作造成的。它是这样来处理这个缺页的：选择一个牺牲页面，如果这个牺牲页面被修改过，那么就将它交换出去，换入新的页面并更新页表。当缺页处理程序返回时，CPU重新启动引起缺页的指令，这条指令将再次发送A到MMU。这次，MMU就能正常的翻译A，而不会再产生缺页中断了。</li>
+                    <ol>
+<li>基础查询<br>
+语法：<br>
+select 查询列表 from 表名<br>
+查询列表可以是字段、表达式、常量、函数等<br>
+常量     ===&gt;     select 100;<br>
+表达式     ===&gt;     select 100%3;<br>
+字段     ===&gt;     select last_name from employees;<br>
+函数(调用函数，获取返回值)     ===&gt;     select database(); select version();  select user();</li>
 </ol>
-<h1 id="内存映射">内存映射</h1>
-<p>Linux通过将一个虚拟内存区域与一个磁盘上的对象(object)关联起来，以初始化这个虚拟内存区域的内容，这个过程称为内存映射(memory mapping)。虚拟内存区域可以映射到两种类型的对象中的一种：<br>
-1）Linux文件系统中的普通文件<br>
-2）匿名文件：映射到匿名文件的区域中的页面有时也叫做请求二进制零的页(demand-zerp page)。<br>
-无论在那种情况中，一旦一个虚拟页面被初始化了，它就在一个由内核维护的专门的交换文件(swap file)之间换来换去。交换文件也叫做(swap space)或者交换区域(swap area)。</p>
-<h1 id="动态内存分配">动态内存分配</h1>
-<p>动态内存分配器维护着一个进程的虚拟内存区域，称为堆(heap)。对于每个进程，内核维护着一个变量brk，它指向堆的顶部。<br>
-分配器将堆视为一组不同大小的块(block)的集合来维护。每个块就是一个连续的虚拟内存片(chunk)，要么是已分配的，要么是空闲的。一个已分配的块保持已分配状态，直到它被释放，这种释放要么是应用程序显示执行的，要么是内存分配器自身隐式执行的。</p>
-<ul>
-<li>显示分配器(explicit allocator)：要求应用显示的释放任何已分配的块。</li>
-<li>隐式分配器(implicit allocator)：要求分配器检测一个已分配块何时不再被程序所使用，那么就释放这个快。隐式分配器也叫做垃圾收集器(garbage collector)，而自动释放未使用的已分配内存的过程叫做垃圾收集(garbage collection)。</li>
-</ul>
+<p>起别名</p>
+<ol>
+<li>使用as关键字     ===&gt;     select user() as 用户名；</li>
+<li>使用空格     ===&gt;     select user() 用户名；</li>
+</ol>
+<p>distinct  去掉重复项<br>
+select distinct department_id from employees;</p>
+<p>查看表的结构<br>
+DESC employees;<br>
+show columns from employees;</p>
+<p>ifnull(表达式1,表达式2)<br>
+表达式1：可能为null的字段或表达式<br>
+表达式2：如果表达式1位null，则显示表达式2，否则显示表达式1</p>
+<ol start="2">
+<li>
+<p>条件查询<br>
+语法：<br>
+select 查询列表 from 表名 where 筛选条件</p>
+<ol>
+<li>按关系表达式筛选<br>
+关系运算符： &gt;、 &lt;、 &gt;=、 &lt;=、 =、 ！=、 &lt;&gt;、</li>
+<li>按逻辑表达式筛选<br>
+逻辑运算符： and、 or、 not、 &amp;&amp;、 ||、 ！、</li>
+<li>模糊查询<br>
+like、 in、 between and、 is null、<br>
+like     ===&gt;     一般与通配符搭配使用，部分匹配查询<br>
+常见通配符： _    ===&gt;     任意单个字符<br>
+%     ===&gt;     任意多个字符<br>
+in     ===&gt;     查询某字段的值是否属于制定列表之内<br>
+in (常量值1，常量值2，常量值3，...)<br>
+between and     ===&gt;     判断某个阻断是否介于xx之间<br>
+is null     ===&gt;     查询是否为null值<br>
+&lt;=&gt;     ===&gt;     安全等于，既能判断普通内容，又能判断null值</li>
+</ol>
+</li>
+<li>
+<p>排序查询<br>
+语法：<br>
+select 查询列表 from 表名 [where 筛选条件] order by 排序列表<br>
+排序列表可以是单个字段，多个字段，表达式，函数，列数，以及以上的组合<br>
+升序 asc 默认行为     降序 desc</p>
+</li>
+</ol>
 
                 </div>
             </article>
@@ -135,14 +163,14 @@ Linux将虚拟内存组织成一些区域(也叫做段)的集合。一个区域(
         
             <div class="next-post">
                 <div class="next gt-c-content-color-first">下一篇</div>
-                <a href="https://dade68.github.io/post/da-cong-ming-niu-bi/" class="post-title gt-a-link">
-                    大聪明牛逼
+                <a href="https://dade68.github.io/post/jyy-osp16-xu-ni-hua-chu-li-qi-diao-du-1shi-jian-pian-rrmlfq-he-cfs/" class="post-title gt-a-link">
+                    jyy-os：P16 [虚拟化]处理器调度(1)：时间片,RR,MLFQ和CFS
                 </a>
             </div>
         
 
         
-            <span id="/post/csapp-chapter-9-xu-ni-nei-cun/" class="leancloud_visitors" data-flag-title="CSAPP Chapter 9: 虚拟内存">
+            <span id="/post/mysql-cha-xun/" class="leancloud_visitors" data-flag-title="Mysql 查询">
                 <em class="post-meta-item-text">阅读量 </em>
                 <i class="leancloud-visitors-count">0</i>
             </span>

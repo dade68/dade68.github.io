@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://dade68.github.io</id>
     <title>flowaflow</title>
-    <updated>2021-01-02T07:58:40.001Z</updated>
+    <updated>2021-03-06T08:18:52.114Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://dade68.github.io"/>
     <link rel="self" href="https://dade68.github.io/atom.xml"/>
@@ -10,6 +10,161 @@
     <logo>https://dade68.github.io/images/avatar.png</logo>
     <icon>https://dade68.github.io/favicon.ico</icon>
     <rights>All rights reserved 2021, flowaflow</rights>
+    <entry>
+        <title type="html"><![CDATA[Mysql 查询]]></title>
+        <id>https://dade68.github.io/post/mysql-cha-xun/</id>
+        <link href="https://dade68.github.io/post/mysql-cha-xun/">
+        </link>
+        <updated>2021-03-06T07:55:47.000Z</updated>
+        <content type="html"><![CDATA[<ol>
+<li>基础查询<br>
+语法：<br>
+select 查询列表 from 表名<br>
+查询列表可以是字段、表达式、常量、函数等<br>
+常量     ===&gt;     select 100;<br>
+表达式     ===&gt;     select 100%3;<br>
+字段     ===&gt;     select last_name from employees;<br>
+函数(调用函数，获取返回值)     ===&gt;     select database(); select version();  select user();</li>
+</ol>
+<p>起别名</p>
+<ol>
+<li>使用as关键字     ===&gt;     select user() as 用户名；</li>
+<li>使用空格     ===&gt;     select user() 用户名；</li>
+</ol>
+<p>distinct  去掉重复项<br>
+select distinct department_id from employees;</p>
+<p>查看表的结构<br>
+DESC employees;<br>
+show columns from employees;</p>
+<p>ifnull(表达式1,表达式2)<br>
+表达式1：可能为null的字段或表达式<br>
+表达式2：如果表达式1位null，则显示表达式2，否则显示表达式1</p>
+<ol start="2">
+<li>
+<p>条件查询<br>
+语法：<br>
+select 查询列表 from 表名 where 筛选条件</p>
+<ol>
+<li>按关系表达式筛选<br>
+关系运算符： &gt;、 &lt;、 &gt;=、 &lt;=、 =、 ！=、 &lt;&gt;、</li>
+<li>按逻辑表达式筛选<br>
+逻辑运算符： and、 or、 not、 &amp;&amp;、 ||、 ！、</li>
+<li>模糊查询<br>
+like、 in、 between and、 is null、<br>
+like     ===&gt;     一般与通配符搭配使用，部分匹配查询<br>
+常见通配符： _    ===&gt;     任意单个字符<br>
+%     ===&gt;     任意多个字符<br>
+in     ===&gt;     查询某字段的值是否属于制定列表之内<br>
+in (常量值1，常量值2，常量值3，...)<br>
+between and     ===&gt;     判断某个阻断是否介于xx之间<br>
+is null     ===&gt;     查询是否为null值<br>
+&lt;=&gt;     ===&gt;     安全等于，既能判断普通内容，又能判断null值</li>
+</ol>
+</li>
+<li>
+<p>排序查询<br>
+语法：<br>
+select 查询列表 from 表名 [where 筛选条件] order by 排序列表<br>
+排序列表可以是单个字段，多个字段，表达式，函数，列数，以及以上的组合<br>
+升序 asc 默认行为     降序 desc</p>
+</li>
+</ol>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[jyy-os：P16 [虚拟化]处理器调度(1)：时间片,RR,MLFQ和CFS]]></title>
+        <id>https://dade68.github.io/post/jyy-osp16-xu-ni-hua-chu-li-qi-diao-du-1shi-jian-pian-rrmlfq-he-cfs/</id>
+        <link href="https://dade68.github.io/post/jyy-osp16-xu-ni-hua-chu-li-qi-diao-du-1shi-jian-pian-rrmlfq-he-cfs/">
+        </link>
+        <updated>2021-03-04T06:01:46.000Z</updated>
+        <content type="html"><![CDATA[<p>有n个任务，完成时间为 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>t</mi><mn>1</mn></msub><mo separator="true">,</mo><msub><mi>t</mi><mn>2</mn></msub><mo separator="true">,</mo><mi mathvariant="normal">.</mi><mi mathvariant="normal">.</mi><mi mathvariant="normal">.</mi><mi mathvariant="normal">.</mi><mi mathvariant="normal">.</mi><mi mathvariant="normal">.</mi><mo separator="true">,</mo><msub><mi>t</mi><mi>N</mi></msub></mrow><annotation encoding="application/x-tex">t_1, t_2, ......, t_N</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.80952em;vertical-align:-0.19444em;"></span><span class="mord"><span class="mord mathdefault">t</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathdefault">t</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">.</span><span class="mord">.</span><span class="mord">.</span><span class="mord">.</span><span class="mord">.</span><span class="mord">.</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathdefault">t</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.32833099999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.10903em;">N</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>，<br>
+最小化所有任务平均cost            ===&gt;&gt;            Shortest job first(SJF)</p>
+<p>任务可以在一天中任意时刻到达<br>
+最小化所有任务平均cost            ===&gt;&gt;           Shortest Time-to-Completion First(STCF)</p>
+<p>策略： RoundRobin                 ===&gt;&gt;           时间片轮转</p>
+<p>策略： 引入优先级                    ===&gt;&gt;            Unix：niceness</p>
+<p>策略： 多级反馈调度(MLFQ)     ===&gt;&gt;            设置若干个Round-Robin队列，每个队列对应一个优先级， 优先调度高优先级队列</p>
+<p>策略： Complete Fair Scheduling(CFS) 完全公平调度（Linux中使用）   ===&gt;&gt;</p>
+<ol>
+<li>记录系统中每个进程的精确运行时间(vruntime, nanoseconds)</li>
+<li>中断发生后，切换到vruntime最少的进程执行<br>
+Linux中使用红黑树维护，使用堆也可以</li>
+</ol>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[CSAPP lab3 attack]]></title>
+        <id>https://dade68.github.io/post/csapp-lab3-attack/</id>
+        <link href="https://dade68.github.io/post/csapp-lab3-attack/">
+        </link>
+        <updated>2021-01-05T04:31:07.000Z</updated>
+        <content type="html"><![CDATA[<p>ROP(return-oriented programming)<br>
+从前面我们可以知道，有缓冲区加上缓冲区的代码可以执行使得程序非常容易被攻击，但是在<strong>rtarget</strong>中使用了两个技术来防止这种攻击：</p>
+<ul>
+<li>每次栈的位置是随机的，于是我们没有办法确定需要跳转的地址</li>
+<li>即使我们能够找到规律注入代码，但是栈是不可执行的，一旦执行，则会遇到段错误</li>
+</ul>
+<p>那么现在怎么办呢？可以利用已有的可执行的代码，来完成我们的操作，称为 retrun-oriented   programming(ROP)，策略就是找到现存代码中的若干条指令，这些指令后面跟着指令 ret，如下图所示<br>
+<img src="https://dade68.github.io/post-images/1609827370643.jpg" alt="" loading="lazy"><br>
+每次 return 相当于从一个 gadget 跳转到另一个 gadget 中，然后通过这样不断跳转来完成我们想要的操作。</p>
+<ul>
+<li>level2</li>
+</ul>
+<blockquote>
+<p>ret：一个字节编码0x30<br>
+nop：一个字节码0x90，什么都不做，只是让程序计数器加1</p>
+</blockquote>
+<p>三步走战略：</p>
+<ol>
+<li>把cookie搞到 <strong>%rdi</strong>中</li>
+<li>把 <strong>touch2</strong>的地址放入栈中</li>
+<li>ret 以开始执行</li>
+</ol>
+<pre><code>00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00
+ab 19 40 00 00 00 00 00
+fa 97 b9 59 00 00 00 00
+a2 19 40 00 00 00 00 00
+ec 17 40 00 00 00 00 00
+</code></pre>
+<ul>
+<li>3</li>
+</ul>
+<p>三步走战略：</p>
+<ol>
+<li>把cookie 转换成 ASCII码通过缓冲区溢出放到栈的某个位置</li>
+<li>把指向cookie字符串的指针放到 <strong>%rdi</strong> 中
+<blockquote>
+<p>把 <strong>%rsp</strong>里的栈指针地址放到**%rdi**，拿到bias的值放到**%rsi**，利用add xy，把栈指针地址和bias加起来放到**%rax**，再传到**%rdx**</p>
+</blockquote>
+</li>
+<li>调用touch3<br>
+内存栈示意图：<br>
+<img src="https://dade68.github.io/post-images/1609829073023.jpg" alt="" loading="lazy"></li>
+</ol>
+<pre><code>00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00
+06 1a 40 00 00 00 00 00
+c5 19 40 00 00 00 00 00
+cc 19 40 00 00 00 00 00
+48 00 00 00 00 00 00 00
+dd 19 40 00 00 00 00 00
+34 1a 40 00 00 00 00 00
+13 1a 40 00 00 00 00 00
+d6 19 40 00 00 00 00 00
+c5 19 40 00 00 00 00 00
+fa 18 40 00 00 00 00 00
+35 39 62 39 39 37 66 61
+00
+</code></pre>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[ 整数寄存器]]></title>
         <id>https://dade68.github.io/post/zheng-shu-ji-cun-qi/</id>
@@ -482,72 +637,6 @@ unsigned floatPower2(int x) {
 <p>客户端和服务器通过因特网这个全球网络来通信。从程序员的观点来看，我们可以把因特网看成是一个全球范围的主机集合，具有以下几个属性: 1)每个因特网主机都有一个唯一的32位名字，称为它的 IP 地址。 2） IP 地址的集合被映射为一个因特网域名的集合。 3）不同因特网主机上的进程能够通过连接互相通信。</p>
 <p>客服端和服务器通过使用套接字接口建立连接。一个套接字是连接的一个端点，连接以文件描述符的形式提供给应用程序。套接字接口提供了打开和关闭套接字描述符的函数。客服端和服务器通过读写这些描述符来实现彼此间的通信。</p>
 <p>Web 服务器使用 HTTP 协议和它们的客户端(例如浏览器)彼此通信。浏览器向服务器请求静态或者动态的内容。对静态内容的请求是通过从服务器磁盘取得文件并把它返回给客户端来服务的。对动态内容的请求是通过在服务器上一个子进程的上下文中运行一个程序并将它的输出返回给客户端来服务的。CGI 标准提供了一组规则，来管理客户端如何将程序参数传递给服务器，服务器如何将这些参数以及其他信息传递给子进程，以及子进程如何将它的输出发送回客户端。只用几百行 C 代码就能实现一个简单但是有功效的 Web 服务器，它既可以提供静态内容，也可以提供动态内容。</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[CSAPP Chapter 12：并发编程]]></title>
-        <id>https://dade68.github.io/post/csapp-chapter-12bing-fa-bian-cheng/</id>
-        <link href="https://dade68.github.io/post/csapp-chapter-12bing-fa-bian-cheng/">
-        </link>
-        <updated>2020-12-20T11:27:51.000Z</updated>
-        <content type="html"><![CDATA[<p>一个并发程序是由在时间上重叠的一组逻辑流组成的。这一章中讲述了三种不同的构建并发程序的机制：进程、I/O多路复用和线程。</p>
-<p>进程是由内核自动调度的，而且因为它们有各自独立的虚拟地址空间，所以要实现共享数据，必须要有显示地IPC机制。事件驱动程序创建它们自己的并发逻辑流，这些逻辑流被模型化为状态机，用 I/O 多路复用来显示地调度这些流。因为程序运行在一个单一进程中，所以在流之间共享数据速度很快而且很容易。线程是这些方法的混合。同基于进程的流一样，线程也是由内核自动调度的。同基于 I/O 多路复用的流一样，线程是运行在一个单一进程的上下文中的，因此可以快速而方便地共享数据。</p>
-<p>无论哪种并发机制，同步对共享数据的并发访问都是一个困难的问题。提出对信号量的 P 和 V 操作就是为了帮助解决这个问题。信号量操作可以用来提供对共享数据的互斥访问，也对诸如生产者-消费者成熟中有限缓冲区和读者-写者系统中的共享对象这样的资源访问进行调度。一个并发预线程化的 echo 服务器提供了信号量使用场景的很好地例子。</p>
-<p>并发也引入了其他的一些困难的问题。被线程调用函数必须具有一种称为线程安全的属性。本章定义了四类线程不安全的函数，以及一些将它们变为线程安全的建议。可重入函数是线程安全函数的一个真子集，它不访问任何共享数据。可重入函数通常比不可重入函数更为有效，因为它们不需要任何同步原语。竞争和死锁是并发程序中出现的另一些困难的问题。当程序员错误地假设逻辑流该如何调度时，就会发生竞争。当一个流等待一个永远都不会发生的事件时，就会发生死锁。</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[CSAPP Chapter 10: 系统级I/O]]></title>
-        <id>https://dade68.github.io/post/csapp-chapter-10-xi-tong-ji-io/</id>
-        <link href="https://dade68.github.io/post/csapp-chapter-10-xi-tong-ji-io/">
-        </link>
-        <updated>2020-12-17T08:07:44.000Z</updated>
-        <content type="html"><![CDATA[<p>输入/输出 (I/O)是在主存和外部设备 (例如磁盘驱动器、终端和网络)之间复制数据的过程。输入操作是从 I/O 设备复制数据到主存，而输出操作是从主存复制数据到 I/O 设备。<br>
-所有语言的运行时系统都提供执行 I/O 的较高级别的工具。例如，ANSI C 提供标准 I/O 库，包含像 printf 和 scanf 这样执行带缓冲区 I/O 函数。C++ 语言用它的重载操作符 &lt;&lt; (输入) 和 &gt;&gt; (输出) 提供了类似的功能。在 Linux 系统中，是通过使用由内核提供的系统级 Unix I/O 函数来实现这些较高级别 I/O 函数的。大多数时候，高级别 I/O 函数工作量好，没有必要直接使用 Unix I/O。</p>
-<h1 id="unix-io">Unix I/O</h1>
-<p>一个 Linux 文件就是一个 <em>m</em> 个字节的序列：<br>
-<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>B</mi><mn>0</mn></msub><mi mathvariant="normal">，</mi><msub><mi>B</mi><mn>1</mn></msub><mi mathvariant="normal">，</mi><mi mathvariant="normal">.</mi><mi mathvariant="normal">.</mi><mi mathvariant="normal">.</mi><mo separator="true">,</mo><msub><mi>B</mi><mi>k</mi></msub><mi mathvariant="normal">，</mi><mi mathvariant="normal">.</mi><mi mathvariant="normal">.</mi><mi mathvariant="normal">.</mi><mo separator="true">,</mo><msub><mi>B</mi><mrow><mi>m</mi><mo>−</mo><mn>1</mn></mrow></msub></mrow><annotation encoding="application/x-tex">B_{0}，B_{1}，...,  B_{k}，...,  B_{m-1}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.891661em;vertical-align:-0.208331em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.05017em;">B</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.05017em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">0</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord cjk_fallback">，</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.05017em;">B</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.05017em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord cjk_fallback">，</span><span class="mord">.</span><span class="mord">.</span><span class="mord">.</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.05017em;">B</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.33610799999999996em;"><span style="top:-2.5500000000000003em;margin-left:-0.05017em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.03148em;">k</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord cjk_fallback">，</span><span class="mord">.</span><span class="mord">.</span><span class="mord">.</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.05017em;">B</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.301108em;"><span style="top:-2.5500000000000003em;margin-left:-0.05017em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">m</span><span class="mbin mtight">−</span><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.208331em;"><span></span></span></span></span></span></span></span></span></span><br>
-所有的 I/O 设备 (例如网络、磁盘和终端) 都被模型化为文件，而所有的输入和输出都被当做对相应文件的读和写来执行。这种将设备优雅的映射为文件的方式，允许 Linux 内核引出一个简单、低级的应用接口，称为 Unix I/O，这使得所有的输入和输出都能以一种统一且一致的方式来执行：</p>
-<ul>
-<li>打开文件。一个应用程序通过要求内核打开相应的文件，来宣告它将要访问一个 I/O 设备。内核返回一个非负整数，叫做描述符，它在后续对此文件的所有操作中标示这个文件。内核纪录有关这个打开文件所有信息。应用程序只需记住这个描述符。
-<blockquote>
-<p>每个进程都有它独立的描述符表 (descriptor table)。而所有的进程共享一张文件表 (file tabel)和一张 v-node表 (v-node table)。</p>
-</blockquote>
-</li>
-<li>Linux shell 创建的每个进程开始时都有三个打开的文件：标准输入 (描述符为0)、标准输出 (描述符为1)和标准错误 (描述符为2)。头文件 &lt;unistd.h&gt; 定义了常量 STDIN_FILENO、STDOUT_FILENO 和 STDERR_FILENO，它们可用来代替显示的描述符值。</li>
-<li>改变当前的文件位置。对于每个打开的文件，内核保持着一个文件位置 <em>k</em> ，初始为0。这个文件位置是从文件开头起始的字节偏移量。应用程序能够通过执行 seek 操作，显示地设置文件的当前位置为 <em>k</em>。</li>
-<li>读写文件。一个读操作就是从文件复制 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>n</mi><mo>&gt;</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">n &gt; 0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.5782em;vertical-align:-0.0391em;"></span><span class="mord mathdefault">n</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">&gt;</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">0</span></span></span></span> 个字节到内存，从当前文件位置 <em>k</em> 开始，然后将 <em>k</em> 增加到 <em>k+n</em>。给定一个大小为 <em>m</em> 字节的文件，当 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>k</mi><mo>&gt;</mo><mo>=</mo><mi>m</mi></mrow><annotation encoding="application/x-tex">k&gt;=m</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.73354em;vertical-align:-0.0391em;"></span><span class="mord mathdefault" style="margin-right:0.03148em;">k</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">&gt;</span></span><span class="base"><span class="strut" style="height:0.36687em;vertical-align:0em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">m</span></span></span></span> 时执行读操作会触发一个称为 end-of-file (EOF) 的条件，应用程序能检测到这个条件。在文件结尾处并没有明确的“EOF”符号。类似的，写操作就是从内存复制 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>n</mi><mo>&gt;</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">n&gt;0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.5782em;vertical-align:-0.0391em;"></span><span class="mord mathdefault">n</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">&gt;</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">0</span></span></span></span> 个字节到一个文件夹，从当前文件位置 <em>k</em> 开始，然后更新 <em>k</em>。</li>
-<li>关闭文件。当应用完成了对文件的访问以后，它就通知内核关闭这个文件。作为响应，内核释放文件打开时创建的数据结构，并将这个描述符恢复到可用的描述符池中。无论一个进程因为何种原因终止时，内核都会关闭所有打开的文件并释放它们的内存资源。</li>
-</ul>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Head First 设计模式 Chapter 2：观察值(Observer)模式]]></title>
-        <id>https://dade68.github.io/post/head-first-she-ji-mo-shi-chapter-2guan-cha-zhi-observermo-shi/</id>
-        <link href="https://dade68.github.io/post/head-first-she-ji-mo-shi-chapter-2guan-cha-zhi-observermo-shi/">
-        </link>
-        <updated>2020-12-15T08:26:13.000Z</updated>
-        <content type="html"><![CDATA[<ul>
-<li>观察者模式定义了对象之间一对多的关系。</li>
-<li>主题(也就是可观察者)用一个共同的接口来更新观察者。</li>
-<li>观察者和可观察者之间用松耦合方式组合(loosecoupling)，可观察者不知道观察者的细节，只知道观察者实现了观察者接口。</li>
-<li>使用此模式时，你可从被观察者处推(push)或拉(pull)数据(然而，推的方式被认为更“正确”)。</li>
-<li>有多个观察者时，不可以依赖特定的通知顺序。</li>
-<li>Java有多种观察者模式的实现，包括了通用的java.util.Observable。</li>
-<li>要注意java.util.Observable实现上所带来的一些问题。</li>
-<li>如果有必要的话，可以实现自己的Observable，这并不难，不要害怕。</li>
-<li>Swing大量使用观察者模式，许多GUI框架也是如此。</li>
-<li>此模式也被应用在许多地方，例如：JavaBeans、RMI。</li>
-</ul>
-<h1 id="oo原则">OO原则</h1>
-<ol>
-<li>封装变化</li>
-<li>多用组合，少用继承</li>
-<li>针对接口编程，不针对实现编程</li>
-<li>为交互对象之间的松耦合设计而努力。</li>
-</ol>
-<h1 id="oo模式">OO模式</h1>
-<p>观察者模式——在对象之间定义一对多的依赖，这样一来，当一个对象改变状态，依赖它的对象都会收到通知，并自动更新。</p>
 ]]></content>
     </entry>
 </feed>
